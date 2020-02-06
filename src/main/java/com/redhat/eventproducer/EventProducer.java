@@ -1,13 +1,8 @@
-package org.acme.quarkus.sample.generator;
+package com.redhat.eventproducer;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -27,15 +22,25 @@ import io.smallrye.reactive.messaging.kafka.KafkaMessage;
 @ApplicationScoped
 public class EventProducer {
 
-    private static final Logger LOG = Logger.getLogger(ValuesGenerator.class);
+    private static final Logger LOG = Logger.getLogger(EventProducer.class);
+
+    private List<String> events = Collections.unmodifiableList(
+            Arrays.asList(
+                    "{'eventValue': 'AIRLINES', 'eventSource': 'WEBSITE'}"
+            ));
 
 
 
     @Outgoing("event-input-stream")
     public Flowable<KafkaMessage<String, String>> generate() {
+        List<KafkaMessage<String, String>> jsonVal = events.stream()
+                .map(s -> KafkaMessage.of(
+                        "CUST894320",
+                        s))
+                .collect(Collectors.toList());
 
+        return Flowable.fromIterable(jsonVal);
 
-                    return KafkaMessage.of("CUST894320", "{'eventValue': 'AIRLINES', 'eventSource': 'WEBSITE'}");
 
     }
 
