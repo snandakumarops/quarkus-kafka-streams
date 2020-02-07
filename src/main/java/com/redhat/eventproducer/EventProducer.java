@@ -29,6 +29,7 @@ public class EventProducer {
             customerEvents.setCustId(customerId);
             customerEvents.setEvent(json);
             events.add(customerEvents);
+            System.out.println("events"+events);
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,6 +44,7 @@ public class EventProducer {
 
     @Outgoing("event-input-stream")
     public Flowable<KafkaMessage<String, String>> generate() {
+        System.out.println("inside generate");
         List<KafkaMessage<String, String>> jsonVal = events.stream()
                 .map(s -> KafkaMessage.of(
                         s.getCustId(),
