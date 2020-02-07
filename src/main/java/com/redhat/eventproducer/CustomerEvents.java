@@ -20,4 +20,12 @@ public class CustomerEvents {
     public void setEvent(String event) {
         this.event = event;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerEvents{" +
+                "custId='" + custId + '\'' +
+                ", event='" + event + '\'' +
+                '}';
+    }
 }
