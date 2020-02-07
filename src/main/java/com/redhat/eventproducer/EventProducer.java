@@ -1,11 +1,13 @@
 package com.redhat.eventproducer;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.jboss.logging.Logger;
@@ -13,21 +15,29 @@ import org.jboss.logging.Logger;
 import io.reactivex.Flowable;
 import io.smallrye.reactive.messaging.kafka.KafkaMessage;
 
-/**
- * A bean producing random temperature data every second.
- * The values are written to a Kafka topic (temperature-values).
- * Another topic contains the name of weather stations (weather-stations).
- * The Kafka configuration is specified in the application configuration.
- */
+@Path("/events")
 @ApplicationScoped
 public class EventProducer {
 
+    @POST
+    @Path("/txn-event/{custId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void postCase(String json,String customerId) {
+
+        try {
+           CustomerEvents customerEvents = new CustomerEvents();
+            customerEvents.setCustId(customerId);
+            customerEvents.setEvent(json);
+            events.add(customerEvents);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private static final Logger LOG = Logger.getLogger(EventProducer.class);
 
-    private List<String> events = Collections.unmodifiableList(
-            Arrays.asList(
-                    "{'eventValue': 'AIRLINES', 'eventSource': 'WEBSITE'}"
-            ));
+    private List<CustomerEvents> events = new ArrayList<>();
 
 
 
@@ -35,8 +45,8 @@ public class EventProducer {
     public Flowable<KafkaMessage<String, String>> generate() {
         List<KafkaMessage<String, String>> jsonVal = events.stream()
                 .map(s -> KafkaMessage.of(
-                        "CUST894320",
-                        s))
+                        s.getCustId(),
+                        s.getEvent()))
                 .collect(Collectors.toList());
 
         return Flowable.fromIterable(jsonVal);
