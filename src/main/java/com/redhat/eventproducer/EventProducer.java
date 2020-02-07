@@ -25,12 +25,13 @@ public class EventProducer {
     public void postCase(String json,@javax.ws.rs.PathParam("custId") String customerId) {
 
         try {
+            events = new ArrayList<>();
            CustomerEvents customerEvents = new CustomerEvents();
             customerEvents.setCustId(customerId);
             customerEvents.setEvent(json);
             events.add(customerEvents);
             System.out.println("events"+events);
-            generate();
+
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,7 +40,7 @@ public class EventProducer {
 
     private static final Logger LOG = Logger.getLogger(EventProducer.class);
 
-    private List<CustomerEvents> events = new ArrayList<>();
+    private List<CustomerEvents> events =null;
 
 
 

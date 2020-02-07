@@ -96,14 +96,11 @@
                         <input type="checkbox">
                         <span>Direct flights</span> </div>
                     </div>
-
-                      <div class="cols">
-
-
-
+                       <div class="cols">
+                        From
                         <div >
                           <div id="example">
-                            <div class="demo-section k-header" style="width: 25px; text-align: center;">
+                            <div class="demo-section k-header" style="width: 20px; text-align: center;">
                               <div id="calendar"></div>
                             </div>
                             <script>
@@ -115,9 +112,23 @@
                           </div>
                         </div>
                       </div>
-                      <div >
-                        hellolllll
-                      </div>
+
+
+                      <div class="cols">
+                        To
+                        <div >
+                          <div id="example1">
+                            <div class="demo-section k-header" style="width: 20px; text-align: center;">
+                              <div id="calendar1"></div>
+                            </div>
+                            <script>
+                $(document).ready(function() {
+                    // create Calendar from div HTML element
+                    $("#calendar1").kendoCalendar();
+                });
+            </script>
+                          </div>
+                        </div>
                     </div>
                     <div class="wrapper pad_bot1"> <span class="left">Passengers</span>
                       <div class="cols marg_right1">
