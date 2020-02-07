@@ -40,7 +40,7 @@ public class EventProducer {
 
     private static final Logger LOG = Logger.getLogger(EventProducer.class);
 
-    private List<CustomerEvents> events =null;
+    private List<CustomerEvents> events =new ArrayList<>();
 
 
 
