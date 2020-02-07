@@ -22,7 +22,7 @@ public class EventProducer {
     @POST
     @Path("/txn-event/{custId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postCase(String json,String customerId) {
+    public void postCase(String json,@javax.ws.rs.PathParam("custId") String customerId) {
 
         try {
            CustomerEvents customerEvents = new CustomerEvents();
