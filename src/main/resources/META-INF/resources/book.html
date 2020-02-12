@@ -15,7 +15,7 @@
 <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
 <script type="text/javascript" src="js/atooltip.jquery.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
-  <base href="http://demos.telerik.com/kendo-ui/calendar/index">
+
   <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>
   <title>Kendo UI Example for WCG</title>
   <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common-material.min.css" />
@@ -30,13 +30,13 @@
 
       var app = angular.module('myApp', []);
       app.controller('FormController', function($scope,$http) {
-      alert("came inside");
+
       var baseURL = window.location.protocol + '//' + window.location.host;
 
 
       $scope.insertLoginEvent = function() {
 
-alert("came inside method");
+
       $http({
               url: baseURL+'/events/txn-event/CUST898920',
               method: "POST",
@@ -49,7 +49,7 @@ alert("came inside method");
           .then(function(response) {
 
 
-                 $scope.offer = JSON.parse(response.data);
+                 $scope.offer = "Your travel has been booked";
 
           },
           function(response) { // optional
@@ -198,7 +198,9 @@ alert("came inside method");
                           </select>
                         </div>
                       </div>
-                      <span class="right relative"><button ng-click="insertLoginEvent()" class="button1" >Submit</button></span> </div>
+                      <span class="right relative"><button ng-click="insertLoginEvent()" class="button1" >Submit</button></span>
+                      <h6 >{{off.eventResponsePayload}}</h6>
+                    </div>
                   </div>
                 </div>
               </form>
