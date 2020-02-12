@@ -35,7 +35,7 @@
 
       $scope.insertLoginEvent = function() {
 
-        alert(baseURL);
+
       $http({
               url: "http://quarkus-kafka-streams-rhpam7-offermgt-sadhananandakumar.apps.cluster-florida-3cb2.florida-3cb2.example.opentlc.com/events/txn-event/CUST898920",
               method: "POST",
@@ -46,12 +46,12 @@
           })
           .then(function(response) {
 
-                alert('here');
+
                  $scope.offer = "Your travel has been booked";
 
           },
           function(response) { // optional
-          alert(error);
+
                   // failed
                   console.log (JSON.stringify (response, null, 2));
 
