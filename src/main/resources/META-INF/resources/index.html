@@ -1,152 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>kafka-streams-quickstart-producer - 1.0-SNAPSHOT</title>
-    <style>
-        h1, h2, h3, h4, h5, h6 {
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            line-height: 1.5;
-        }
+    <title>AirLines | Book</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <script type="text/javascript" src="js/jquery-1.5.2.js" ></script>
+    <script type="text/javascript" src="js/cufon-yui.js"></script>
+    <script type="text/javascript" src="js/cufon-replace.js"></script>
+    <script type="text/javascript" src="js/Cabin_400.font.js"></script>
+    <script type="text/javascript" src="js/tabs.js"></script>
+    <script type="text/javascript" src="js/jquery.jqtransform.js" ></script>
+    <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript" src="js/atooltip.jquery.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 
-        h1 {
-            font-size: 2.5rem;
-        }
+    <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>
+    <title>Kendo UI Example for WCG</title>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.dataviz.material.min.css" />
 
-        h2 {
-            font-size: 2rem
-        }
+    <script src="http://cdn.kendostatic.com/2015.1.429/js/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.all.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script>
 
-        h3 {
-            font-size: 1.75rem
-        }
+      var app = angular.module('myApp', []);
+      app.controller('FormController', function($scope,$http) {
 
-        h4 {
-            font-size: 1.5rem
-        }
+      var baseURL = window.location.protocol + '//' + window.location.host;
 
-        h5 {
-            font-size: 1.25rem
-        }
 
-        h6 {
-            font-size: 1rem
-        }
+      $scope.insertLoginEvent = function() {
 
-        .lead {
-            font-weight: 300;
-            font-size: 2rem;
-        }
 
-        .banner {
-            font-size: 2.7rem;
-            margin: 0;
-            padding: 2rem 1rem;
-            background-color: #00A1E2;
-            color: white;
-        }
+      $http({
+              url: baseURL+'/events/txn-event/CUST898920',
+              method: "POST",
+              headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
 
-        body {
-            margin: 0;
-            font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        }
+          })
+          .then(function(response) {
 
-        code {
-            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 87.5%;
-            color: #e83e8c;
-            word-break: break-word;
-        }
 
-        .left-column {
-            padding: .75rem;
-            max-width: 75%;
-            min-width: 55%;
-        }
+                 $scope.offer = "Your travel has been booked";
 
-        .right-column {
-            padding: .75rem;
-            max-width: 25%;
-        }
+          },
+          function(response) { // optional
+          alert(error);
+                  // failed
+                  console.log (JSON.stringify (response, null, 2));
 
-        .container {
-            display: flex;
-            width: 100%;
-        }
+          });
 
-        li {
-            margin: 0.75rem;
-        }
 
-        .right-section {
-            margin-left: 1rem;
-            padding-left: 0.5rem;
-        }
 
-        .right-section h3 {
-            padding-top: 0;
-            font-weight: 200;
-        }
+      }
+      });
 
-        .right-section ul {
-            border-left: 0.3rem solid #00A1E2;
-            list-style-type: none;
-            padding-left: 0;
-        }
 
-    </style>
+ </script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/html5.js"></script>
+    <style type="text/css">.main, .tabs ul.nav a, .content, .button1, .box1, .top { behavior:url("../js/PIE.htc")}</style>
+
+
+    <![endif]-->
 </head>
-<body>
+<body id="page3" ng-app="myApp" ng-controller="FormController">
+<div class="main">
+    <!--header -->
+    <header>
+        <div class="wrapper">
+            <h1><a href="#" id="logo">AirLines</a></h1>
+            <span id="slogan">Fast, Frequent &amp; Safe Flights</span>
+            <nav id="top_nav">
+                <ul>
+                    <li><a href="#" class="nav1">Home</a></li>
+                    <li><a href="#" class="nav2">Sitemap</a></li>
+                    <li><a href="#" class="nav3">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <nav>
+            <ul id="menu">
+                <li><a href="#"><span><span>About</span></span></a></li>
+                <li><a href="#"><span><span>Offers</span></span></a></li>
+                <li id="menu_active"><a href="book.html"><span><span>Book</span></span></a></li>
+                <li><a href="#"><span><span>Services</span></span></a></li>
+                <li><a href="#"><span><span>Safety</span></span></a></li>
+                <li class="end"><a href="#"><span><span>Contacts</span></span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- / header -->
+    <!--content -->
+    <section id="content">
+        <div class="wrapper pad1">
 
-<div class="banner lead">
-    Your new Cloud-Native application is ready!
+            <article class="col2">
+                <div class="tabs2">
+                    <ul class="nav">
+                        <li class="selected"><a href="#Flight">Flight</a></li>
+
+                    </ul>
+                    <div class="content">
+                        <div class="tab-content" id="Flight">
+                            <form id="form_5" action="#" class="form_5" method="post">
+                                <div>
+                                    <div class="radio">
+                                        <div class="wrapper">
+                                            <input type="radio" name="name1" checked>
+                                            <span class="left">Show prices</span>
+                                            <input type="radio" name="name1">
+                                            <span class="left">Show flights</span> </div>
+                                    </div>
+                                    <div class="pad">
+                                        <div class="wrapper under">
+                                            <div class="col1">
+                                                <div class="row"><span class="left">From</span>
+                                                    <input type="text" class="input">
+                                                </div>
+                                                <div class="row"><span class="left">To</span>
+                                                    <input type="text" class="input">
+                                                </div>
+                                            </div>
+                                            <div class="check_box">
+                                                <input type="checkbox">
+                                                <span>One way</span> </div>
+                                            <div class="check_box">
+                                                <input type="checkbox">
+                                                <span>Direct flights</span> </div>
+                                        </div>
+                                        <div class="cols">
+                                            From
+                                            <div >
+                                                <div id="example">
+                                                    <div class="demo-section k-header" style="width: 20px; text-align: center;">
+                                                        <div id="calendar"></div>
+                                                    </div>
+                                                    <script>
+                $(document).ready(function() {
+                    // create Calendar from div HTML element
+                    $("#calendar").kendoCalendar();
+                });
+            </script>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="cols">
+                                            To
+                                            <div >
+                                                <div id="example1">
+                                                    <div class="demo-section k-header" style="width: 20px; text-align: center;">
+                                                        <div id="calendar1"></div>
+                                                    </div>
+                                                    <script>
+                $(document).ready(function() {
+                    // create Calendar from div HTML element
+                    $("#calendar1").kendoCalendar();
+                });
+            </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper pad_bot1"> <span class="left">Passengers</span>
+                                            <div class="cols marg_right1">
+                                                <div class="row">
+                                                    <input type="text" class="input2" value="2"  onblur="if(this.value=='') this.value='2'" onFocus="if(this.value =='2' ) this.value=''">
+                                                    <span class="left">Adults</span>  </div>
+                                                <div class="row">
+                                                    <input type="text" class="input2" value="0"  onblur="if(this.value=='') this.value='0'" onFocus="if(this.value =='0' ) this.value=''">
+                                                    <span class="left">Children</span> </div>
+                                            </div>
+                                            <div class="cols">
+                                                <div class="select1"><span class="left">Class</span>
+                                                    <select>
+                                                        <option>Economy</option>
+                                                    </select>
+                                                </div>
+                                                <div class="select1"><span class="left">Airline</span>
+                                                    <select>
+                                                        <option>Airlines</option>
+                                                    </select>
+                                                </div>
+                                                <div class="select1"><span class="left">Pay</span>
+                                                    <select>
+                                                        <option>Card ending in 4567</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span class="right relative"><button ng-click="insertLoginEvent()" class="button1" >Submit</button></span>
+                                            <h6 >{{off.eventResponsePayload}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        </form>
+                    </div>
+                </div>
+        </div>
+        </article>
 </div>
-
-<div class="container">
-    <div class="left-column">
-        <p class="lead"> Congratulations, you have created a new Quarkus application.</p>
-
-        <h2>Why do you see this?</h2>
-
-        <p>This page is served by Quarkus. The source is in
-            <code>src/main/resources/META-INF/resources/index.html</code>.</p>
-
-        <h2>What can I do from here?</h2>
-
-        <p>If not already done, run the application in <em>dev mode</em> using: <code>mvn compile quarkus:dev</code>.
-        </p>
-        <ul>
-            <li>Add REST resources, Servlets, functions and other services in <code>src/main/java</code>.</li>
-            <li>Your static assets are located in <code>src/main/resources/META-INF/resources</code>.</li>
-            <li>Configure your application in <code>src/main/resources/application.properties</code>.
-            </li>
+</section>
+<!--content end-->
+<!--footer -->
+<footer>
+    <div class="wrapper">
+        <ul id="icons">
+            <li><a href="#" class="normaltip"><img src="images/icon1.jpg" alt=""></a></li>
+            <li><a href="#" class="normaltip"><img src="images/icon2.jpg" alt=""></a></li>
+            <li><a href="#" class="normaltip"><img src="images/icon3.jpg" alt=""></a></li>
+            <li><a href="#" class="normaltip"><img src="images/icon4.jpg" alt=""></a></li>
+            <li><a href="#" class="normaltip"><img src="images/icon5.jpg" alt=""></a></li>
+            <li><a href="#" class="normaltip"><img src="images/icon6.jpg" alt=""></a></li>
         </ul>
-
-        <h2>How do I get rid of this page?</h2>
-        <p>Just delete the <code>src/main/resources/META-INF/resources/index.html</code> file.</p>
+        <div class="links">Copyright &copy; <a href="#">Domain Name</a> All Rights Reserved<br>
+            Design by <a target="_blank" href="http://www.templatemonster.com/">TemplateMonster.com</a></div>
     </div>
-    <div class="right-column">
-        <div class="right-section">
-            <h3>Application</h3>
-            <ul>
-                <li>GroupId: org.acme</li>
-                <li>ArtifactId: kafka-streams-quickstart-producer</li>
-                <li>Version: 1.0-SNAPSHOT</li>
-                <li>Quarkus Version: 1.2.0.Final</li>
-            </ul>
-        </div>
-        <div class="right-section">
-            <h3>Next steps</h3>
-            <ul>
-                <li><a href="https://quarkus.io/guides/maven-tooling.html" target="_blank">Setup your IDE</a></li>
-                <li><a href="https://quarkus.io/guides/getting-started.html" target="_blank">Getting started</a></li>
-                <li><a href="https://quarkus.io" target="_blank">Quarkus Web Site</a></li>
-            </ul>
-        </div>
-    </div>
+</footer>
+<!--footer end-->
 </div>
-
-
+<script type="text/javascript">Cufon.now();</script>
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+    $('.form_5').jqTransform({
+        imgPath: 'jqtransformplugin/img/'
+    });
+});
+$(document).ready(function () {
+    tabs2.init();
+});
+</script>
 </body>
 </html>
