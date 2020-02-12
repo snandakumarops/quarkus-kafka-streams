@@ -33,11 +33,11 @@
       var baseURL = window.location.protocol + '//' + window.location.host;
 
 
-      $scope.insertLoginEvent = function(cust) {
+      $scope.insertLoginEvent = function() {
 
 
       $http({
-              url: baseURL+'/events/txn-event/'+cust,
+              url: baseURL+'/events/txn-event/CUST898920',
               method: "POST"
 
           })
@@ -191,7 +191,7 @@
                           </select>
                         </div>
                       </div>
-                      <span class="right relative"><a href="#" class="button1" ng-click="insertLoginEvent()><strong>Submit</strong></a></span> </div>
+                      <span class="right relative"><a ng-click="insertLoginEvent()" class="button1" ><strong>Submit</strong></a></span> </div>
                   </div>
                 </div>
               </form>
