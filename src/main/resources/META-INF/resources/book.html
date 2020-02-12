@@ -36,7 +36,7 @@
 
       $scope.insertLoginEvent = function() {
 
-
+alert("came inside method");
       $http({
               url: baseURL+'/events/txn-event/CUST898920',
               method: "POST",
@@ -48,10 +48,12 @@
           })
           .then(function(response) {
 
+
                  $scope.offer = JSON.parse(response.data);
 
           },
           function(response) { // optional
+          alert(error);
                   // failed
                   console.log (JSON.stringify (response, null, 2));
 
