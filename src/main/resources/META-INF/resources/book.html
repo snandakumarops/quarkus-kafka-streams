@@ -25,13 +25,48 @@
 
   <script src="http://cdn.kendostatic.com/2015.1.429/js/jquery.min.js"></script>
   <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.all.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script>
 
+      var app = angular.module('myApp', []);
+      app.controller('FormController', function($scope,$http) {
+      var baseURL = window.location.protocol + '//' + window.location.host;
+
+
+      $scope.insertLoginEvent = function(cust) {
+
+
+      $http({
+              url: baseURL+'/events/txn-event/'+cust,
+              method: "POST"
+
+          })
+          .then(function(response) {
+
+                 $scope.offer = JSON.parse(response.data);
+
+          },
+          function(response) { // optional
+                  // failed
+                  console.log (JSON.stringify (response, null, 2));
+
+          });
+
+
+
+      }
+      });
+
+
+ </script>
   <!--[if lt IE 9]>
 <script type="text/javascript" src="js/html5.js"></script>
 <style type="text/css">.main, .tabs ul.nav a, .content, .button1, .box1, .top { behavior:url("../js/PIE.htc")}</style>
+
+
 <![endif]-->
 </head>
-<body id="page3">
+<body id="page3" ng-app="myApp" ng-controller="FormController">
 <div class="main">
   <!--header -->
   <header>
@@ -156,7 +191,7 @@
                           </select>
                         </div>
                       </div>
-                      <span class="right relative"><a href="#" class="button1"><strong>Submit</strong></a></span> </div>
+                      <span class="right relative"><a href="#" class="button1" ng-click="insertLoginEvent()><strong>Submit</strong></a></span> </div>
                   </div>
                 </div>
               </form>
