@@ -39,7 +39,11 @@
 
       $http({
               url: baseURL+'/events/txn-event/CUST898920',
-              method: "POST"
+              method: "POST",
+              headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
 
           })
           .then(function(response) {
