@@ -38,7 +38,10 @@
         alert(baseURL);
       $http({
               url: "http://quarkus-kafka-streams-rhpam7-offermgt-sadhananandakumar.apps.cluster-florida-3cb2.florida-3cb2.example.opentlc.com/events/txn-event/CUST898920",
-              method: "POST"
+              method: "POST",
+              headers: {
+            'Content-Type': 'application/json'
+   }
 
           })
           .then(function(response) {
