@@ -49,13 +49,16 @@ public class EventProducer {
 
     @Outgoing("event-input-stream")
     public Flowable<KafkaMessage<String, String>> generate() {
-        System.out.println("inside generate"+events);
-        List<KafkaMessage<String, String>> jsonVal = events.stream()
-                .map(s -> KafkaMessage.of(
-                        s.getCustId(),
-                        s.getEvent()))
-                .collect(Collectors.toList());
-
+        try {
+            System.out.println("inside generate" + events);
+            List<KafkaMessage<String, String>> jsonVal = events.stream()
+                    .map(s -> KafkaMessage.of(
+                            s.getCustId(),
+                            s.getEvent()))
+                    .collect(Collectors.toList());
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
         return Flowable.fromIterable(jsonVal);
 
 
