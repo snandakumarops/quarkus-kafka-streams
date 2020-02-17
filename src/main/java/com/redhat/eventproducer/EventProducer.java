@@ -11,7 +11,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
+import io.vertx.core.json.Json;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.jboss.logging.Logger;
 
@@ -31,11 +33,11 @@ public class EventProducer {
     public void postCase(String json,@javax.ws.rs.PathParam("custId") String customerId) {
 
         try {
-
+            String jsonStr = "{\"eventValue\": \""+json+"\", \"eventSource\": \"WEBSITE\"}";
            CustomerEvents customerEvents = new CustomerEvents();
             customerEvents.setCustId(customerId);
             customerEvents.setEvent(json);
-            kafkaController.produce(customerId,json);
+            kafkaController.produce(customerId,jsonStr);
 
 
         }catch (Exception e) {
