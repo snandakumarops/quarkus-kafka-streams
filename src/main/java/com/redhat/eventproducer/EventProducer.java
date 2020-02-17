@@ -56,10 +56,12 @@ public class EventProducer {
                             s.getCustId(),
                             s.getEvent()))
                     .collect(Collectors.toList());
+            return Flowable.fromIterable(jsonVal);
         }catch(Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return Flowable.fromIterable(jsonVal);
+
 
 
     }
