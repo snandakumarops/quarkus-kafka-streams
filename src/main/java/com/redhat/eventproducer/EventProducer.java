@@ -4,12 +4,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.jboss.logging.Logger;
 
@@ -19,6 +21,8 @@ import io.smallrye.reactive.messaging.kafka.KafkaMessage;
 @Path("/events")
 @ApplicationScoped
 public class EventProducer {
+    @Inject
+    KafkaController kafkaController;
 
     @POST
     @Path("/txn-event/{custId}")
@@ -27,46 +31,17 @@ public class EventProducer {
     public void postCase(String json,@javax.ws.rs.PathParam("custId") String customerId) {
 
         try {
-            events = new ArrayList<>();
+
            CustomerEvents customerEvents = new CustomerEvents();
             customerEvents.setCustId(customerId);
             customerEvents.setEvent(json);
-            events.add(customerEvents);
-            System.out.println("events"+events);
+            kafkaController.produce(customerId,new Gson().toJson(customerEvents));
 
 
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
-    private static final Logger LOG = Logger.getLogger(EventProducer.class);
-
-    private List<CustomerEvents> events =new ArrayList<>();
-
-
-
-    @Outgoing("event-input-stream")
-    public Flowable<KafkaMessage<String, String>> generate() {
-        try {
-            System.out.println("inside generate" + events);
-            List<KafkaMessage<String, String>> jsonVal = events.stream()
-                    .map(s -> KafkaMessage.of(
-                            s.getCustId(),
-                            s.getEvent()))
-                    .collect(Collectors.toList());
-            return Flowable.fromIterable(jsonVal);
-        }catch(Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-
-
-    }
-
-
 
 
 }
