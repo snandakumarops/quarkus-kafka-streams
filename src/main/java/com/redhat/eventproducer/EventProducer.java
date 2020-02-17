@@ -29,7 +29,7 @@ public class EventProducer {
 
 
     @Outgoing("event-input-stream")
-    public Flowable<KafkaMessage<String, String>> generate() {
+    public static Flowable<KafkaMessage<String, String>> generate() {
         System.out.println("inside generate"+events);
         List<KafkaMessage<String, String>> jsonVal = events.stream()
                 .map(s -> KafkaMessage.of(

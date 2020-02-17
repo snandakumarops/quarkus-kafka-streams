@@ -27,6 +27,7 @@ public class EventEndpoint {
             customerEvents.setEvent(json);
             EventProducer.events.add(customerEvents);
             System.out.println("events"+EventProducer.events);
+            EventProducer.generate();
 
         }catch (Exception e) {
             e.printStackTrace();
