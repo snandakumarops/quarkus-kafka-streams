@@ -33,7 +33,7 @@ public class EventProducer {
             customerEvents.setEvent(json);
             events.add(customerEvents);
             System.out.println("events"+events);
-            generate();
+
 
         }catch (Exception e) {
             e.printStackTrace();
