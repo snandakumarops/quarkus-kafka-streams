@@ -35,7 +35,7 @@ public class EventProducer {
            CustomerEvents customerEvents = new CustomerEvents();
             customerEvents.setCustId(customerId);
             customerEvents.setEvent(json);
-            kafkaController.produce(customerId,new Gson().toJson(customerEvents));
+            kafkaController.produce(customerId,json);
 
 
         }catch (Exception e) {
