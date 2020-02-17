@@ -16,20 +16,39 @@ import org.jboss.logging.Logger;
 import io.reactivex.Flowable;
 import io.smallrye.reactive.messaging.kafka.KafkaMessage;
 
-
+@Path("/events")
 @ApplicationScoped
 public class EventProducer {
 
+    @POST
+    @Path("/txn-event/{custId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void postCase(String json,@javax.ws.rs.PathParam("custId") String customerId) {
+
+        try {
+            events = new ArrayList<>();
+           CustomerEvents customerEvents = new CustomerEvents();
+            customerEvents.setCustId(customerId);
+            customerEvents.setEvent(json);
+            events.add(customerEvents);
+            System.out.println("events"+events);
+            generate();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private static final Logger LOG = Logger.getLogger(EventProducer.class);
 
-    public static List<CustomerEvents> events =new ArrayList<>();
+    private List<CustomerEvents> events =new ArrayList<>();
 
 
 
     @Outgoing("event-input-stream")
-    public static Flowable<KafkaMessage<String, String>> generate() {
+    public Flowable<KafkaMessage<String, String>> generate() {
         System.out.println("inside generate"+events);
         List<KafkaMessage<String, String>> jsonVal = events.stream()
                 .map(s -> KafkaMessage.of(
