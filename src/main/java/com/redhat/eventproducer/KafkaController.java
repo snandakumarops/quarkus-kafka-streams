@@ -26,6 +26,7 @@ public class KafkaController {
     }
 
     public void produce(String id,String message) {
+        System.out.println(id+"::"+message);
         emitter.onNext(KafkaMessage.of(id, message));
     }
 
